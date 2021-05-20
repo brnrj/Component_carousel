@@ -1,23 +1,23 @@
-import logo from './logo.svg';
+import Carousel from './components'
 import './App.css';
-
+import { useContext } from 'react';
+import Context from './context/Context'
 function App() {
+  const {pokemon, handleRight, handleLeft, value} = useContext(Context)
+  console.log(value)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Carousel.Container>
+        <Carousel.ImageContainer theme={value}>
+          {pokemon.map((element, index) => (
+            <Carousel.Image key={index} src={element.imageUrl}/>
+          ))}
+        </Carousel.ImageContainer>
+        <Carousel.ButtonsContainer>
+          <Carousel.Button onClick={handleLeft}>Left</Carousel.Button>
+          <Carousel.Button onClick={handleRight}>Right</Carousel.Button>
+        </Carousel.ButtonsContainer>
+      </Carousel.Container>
     </div>
   );
 }
